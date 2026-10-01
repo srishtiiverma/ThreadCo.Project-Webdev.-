@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact.html</title>
-  <style>
-    table,tr,td,th{
-      border:1px solid black;
-      border-collapse:collapse;
-    }
-  </style>
-  <link rel="stylesheet" href="style.css">
-      
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - ThreadCo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header>
+    <!-- <header>
+        <h1>ThreadCo</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="product.html">Product Detail</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Cart (0)</a></li>
+            </ul>
+        </nav>
+    </header> -->
+    <header>
  <h1>Thread Co</h1>
  
  <nav>
@@ -38,80 +44,221 @@
  </ul>
  </nav>
 </header>
-<main>
-  <section>
-    <h2>Get In Touch</h2>
-    <p>Have a Question, a Collab idea, or just want to talk street fashion?<strong>We are here.</strong>Real humans,real replies - within 24 hours.</p>
-  </section>
-  <section>
-    <h2>Send us a Message</h2>
-    <fieldset>
-      <legend>Your Info</legend>
-      <label for="name">Full Name: </label>
-      <input type="text" id="name" placeholder="Srishti Verma">
-      <br><br>
-      <label for="Email">Email Address: </label>
-      <input type="Email" id="Email" placeholder="shristhiverma05@gmail.com">
-      <br><br>
-      <label for="phone number">Phone Number(Optional): </label>
-      <input type="number" id="phone number" placeholder="8126260247">
-      <br>
-      <small>10-digit Indian mobile number</small>
-        
-    </fieldset>
-    <br><br>
-    <fieldset>
-      <legend>Your Message</legend>
-      <label for="Subject">Subject:</label>
-      <Select id="Subject">Subject:>
-        <option>-- Select a Topic --</option>
-        <option>Order issue</option>
-        <option>Return / Refund</option>
-        <option>Collaboration / Partnership</option>
-        <option>Wholesale Enquiry</option>
-        <option>General Query</option>
-      </Select>
-      <p>Message:</p>
-      <textarea rows="4" cols="48" placeholder="Tell us What is on your mind..."></textarea>
-      <p>Attach a File (Optional):</p>
-      <label for="file"></label>
-      <input type="file" id="file">
-      <p>Max File size: 5MB. Accepted: JPG,PNG,PDF</p>
-      <input type="checkbox" id="Privacy Policy">
-      <label for="Privacy Policy">I agree to be contracted by Thread Co regarding my enquiry. I have read the <a href="">Privacy Policy</a> </label>
-  </fieldset>
-    <br>
-  <button>Send Message</button>    
-  <button>Clear Form</button>
-  </section>
-  <section>
-    <h1>Our Details</h1>
-    <address>
-      <strong>ThreadCo HQ</strong><br>
-      42, Street Level, Hauz Khas Village<br>
-      New Delhi-110016<br>
-      India
-    <br><br>
+
+    <main>
+        <section class="get-in-touch">
+            <h2>Get In Touch</h2>
+            <p>Have a question, a collab idea, or just want to talk street fashion? <strong>We are here.</strong> Real
+                humans, real replies - within 24 hours.</p>
+        </section>
+
+
+        <div class="details">
+            <section class="send-us-message">
+                <h2>Send Us a Message</h2>
+
+                <form action="">
+
+                    <fieldset id="field">
+                        <legend>Your Info</legend>
+
+                        <label for="fullname" >Full Name:</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Rahul Kumar" required
+                            minlength="2" maxlength="60">
+
+                        <label for="email" >Email Address:</label>
+                        <input type="email" id="email" name="email" placeholder="rahul@example.com" required>
+
+                        <label for="phone" >Phone Number (optional):</label>
+                        <input type="tel" id="phone" name="phone" placeholder="9876543210">
+                        <small>10-digit Indian mobile number</small>
+                    </fieldset>
+
+
+                    <fieldset id="field">
+                        <legend>Your Message</legend>
+
+                        <label for="subject">Subject:</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Select a Topic --</option>
+                            <option value="order-issue">Order Issue</option>
+                            <option value="return-refund">Return / Refund</option>
+                            <option value="collaboration">Collaboration / Partnership</option>
+                            <option value="wholesale">Wholesale Enquiry</option>
+                            <option value="general">General Query</option>
+                        </select>
+
+                        <br><br>
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="6" cols="50"
+                            placeholder="Tell us what is on your mind..." required minlength="20"></textarea>
+                        <br><br>
+                        <label for="attachment">Attach a File (optional):</label>
+                        <input type="file" id="attachment" name="attachment">
+                        <small>Max file size: 5MB. Accepted: JPG, PNG, PDF</small><br><br>
+
+
+                        <div class="consent">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">
+                                I agree to be contacted by ThreadCo regarding my enquiry.
+                                I have read the <a href="#">Privacy Policy</a>.
+                            </label>
+                        </div>
+                    </fieldset>
+
+
+                    <div class="contact-btns">
+                        <button type="submit">Send Message</button>
+                        <button type="reset">Clear Form</button>
+                    </div>
+
+                </form>
+            </section>
+            <br><br><br>
+
+
+            <section class="our-details">
+                <h2>Our Details</h2>
+
+                <address>
+                    <strong>ThreadCo HQ</strong> <br>
+                    42, Street Level, Hauz Khas Village <br>
+                    New Delhi — 110016 <br>
+                    India
+                    <br><br>
+                    <a href="mailto:shristhiverma05@gmail.com">hello@threadco.in</a>
+                    <br>
+                    <a href="tel:+911234567890">+91 12345 67890</a>
+                </address>
+
+                <div>
+                    <h3>Store Hours</h3>
+                    <div class="table-scroll">
+                        <table>
+                            <tr>
+                                <th>Day</th>
+                                <th>Hours</th>
+                            </tr>
+                            <tr>
+                                <td>Monday — Friday</td>
+                                <td>10:00 AM — 7:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>11:00 AM — 5:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td>Closed</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="https://instagram.com" target="_blank">Instagram &mdash; @threadco.in</a></li>
+                        <li><a href="https://twitter.com" target="_blank">Twitter &mdash; @threadco</a></li>
+                        <li><a href="https://youtube.com" target="_blank">YouTube &mdash; ThreadCo</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+
+        <section class="common-questions">
+
+            <h2>Common Questions</h2>
+            <p>Quick answers so you don&rsquo;t have to wait for a reply.</p>
+
+            <details>
+                <summary>How long does delivery take?</summary>
+                <p>
+                    We ship within <strong>48 hours</strong> of order confirmation.
+                    Standard delivery takes <strong>3&mdash;5 business days</strong> across India.
+                    Express delivery (1&mdash;2 days) is available at checkout for select pin codes.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can I return my order?</summary>
+                <p>
+                    Yes! We offer <strong>free returns within 7 days</strong> of delivery.
+                    The item must be unworn, unwashed, and in its original packaging with all tags attached.
+                    Initiate your return from the Orders section of your account.
+                </p>
+            </details>
+
+            <details>
+                <summary>Do you ship internationally?</summary>
+                <p>
+                    Not yet &mdash; but we&rsquo;re working on it.
+                    International shipping is planned for early 2026.
+                    Sign up for our newsletter to get notified first.
+                </p>
+            </details>
+
+            <details>
+                <summary>Are your products true to size?</summary>
+                <p>
+                    ThreadCo tees and hoodies are <strong>oversized by design</strong>.
+                    If you prefer a more fitted look, we recommend sizing down.
+                    Check the <a href="product.html#size-chart">Size Guide</a> on any product page for exact
+                    measurements.
+                </p>
+            </details>
+
+            <details>
+                <summary>How do I track my order?</summary>
+                <p>
+                    Once your order ships, you will receive a tracking link via SMS and email.
+                    You can also track your order by entering your order ID on our
+                    <a href="#">Order Tracking page</a>.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can I collaborate or submit designs?</summary>
+                <p>
+                    Absolutely. ThreadCo works with independent Indian artists on every drop.
+                    If you have a design concept or want to collab, reach out via the form above
+                    and select <strong>&ldquo;Collaboration / Partnership&rdquo;</strong> as the subject.
+                    We read every single message.
+                </p>
+            </details>
+
+        </section>
+    </main>
+     <footer id="foot">
+        <h4>&copy Thread co. All rights reserved.</h4>
+        <em>Wear the code,live the street</em>
+        <ul id="list" >
+            <li>
+                <a href="project.html">Home</a>
+            </li>
+            <li>
+                <a href="product.html">Product</a>
+            </li>
+            <li>
+                <a href="contact.html">Contact</a>
+            <li>
+                <a href="">Privacy & Policy</a>
+            </li>
+            <li>
+                <a href="">Terms & Conditions</a>
+            </li>
+        </ul>
+        <a href="">Instagram| </a>
+        <a href="">Youtube| </a>
+        <a href="">Twitter </a>
+
+</footer>
+
     
-    <a href="mailto:shristhverma05@gmail.com">hello@threadco.in</a>
-    <br>
-    <a href="Tel:+918126260247">+91 1234567890</a>
-    </address>
-    <br><br>
-    <strong>Store Hours</strong>
-    <table>
-      <t head>
-      <tr>
-        <th>Day</th>
-        <th>Hours</th>
-      </tr>
-    </t>
-      <tr>
-        <td>Monday - Friday</td>
-        <td>10:00AM - 7:00PM</td>
-      </tr>
-      <tr>
-        <td>Saturday</td>
-        <td>11:00AM - 5:00PM</td>
-      </tr>
-      <tr>
+
+
+</body>
+
+</html>
