@@ -1392,3 +1392,78 @@ font-size:1.2rem;
     width: 100%;
     max-width: 900px;
 }
+/* Checkout Page */
+
+#order-summary,
+#checkout-form,
+#confirmation {
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+#order-summary {
+    padding: 25px;
+    border: 1px solid #555;
+    border-radius: 12px;
+}
+
+#order-summary h3,
+#order-summary p,
+#checkout-form,
+#checkout-form h3,
+#checkout-form label,
+#confirmation,
+#confirmation h2,
+#confirmation p {
+    color: white;
+}
+
+#checkout-form input,
+#checkout-form textarea {
+    width: 100%;
+    max-width: 650px;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #777;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: white;
+    color: black;
+}
+
+#checkout-form textarea {
+    resize: vertical;
+}
+
+#checkout-form input[type="radio"] {
+    width: auto;
+    margin-right: 6px;
+}
+
+#checkout-form button {
+    padding: 12px 25px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 6px;
+    background: #b83bd1;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#confirmation {
+    text-align: center;
+    padding: 30px;
+    border: 1px solid #555;
+    border-radius: 12px;
+}
+
+#confirmation a {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 15px;
+    border-radius: 6px;
+    background: #b83bd1;
+    color: white;
+    text-decoration: none;
+}
