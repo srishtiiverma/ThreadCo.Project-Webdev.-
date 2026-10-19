@@ -19,7 +19,7 @@ function buyNow(name, price) {
         price: price
     }));
 
-    window.location.href = "cart.html";
+    window.location.href = "checkout.html";
 }
 
 function updateCartCount() {
