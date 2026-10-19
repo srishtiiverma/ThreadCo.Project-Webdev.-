@@ -81,6 +81,65 @@ function getPrice(product) {
 }
 
 
+document.getElementById("apply-filters").addEventListener("click", function () {
+
+    const selectedCategories = Array.from(
+        document.querySelectorAll('input[name="category"]:checked')
+    ).map(checkbox => checkbox.value);
+
+    const minPrice = Number(document.getElementById("price-min").value) || 0;
+    const maxPrice = Number(document.getElementById("price-max").value) || Infinity;
+
+    const products = Array.from(
+        document.querySelectorAll("#products .grid article")
+    );
+
+    products.forEach(product => {
+
+        const category = product.querySelector("p span")?.textContent
+            .trim()
+            .toLowerCase();
+
+        const priceText = product.querySelector("p strong")?.textContent || "";
+        const price = Number(priceText.replace(/[^\d]/g, ""));
+
+        let categoryMatch = true;
+
+        if (selectedCategories.length > 0) {
+            categoryMatch = selectedCategories.some(value => {
+
+                if (value === "tshirts") {
+                    return category.includes("tshirt") || category.includes("t-shirt");
+                }
+
+                if (value === "hoodies") {
+                    return category.includes("hoodie");
+                }
+
+                if (value === "cargo") {
+                    return category.includes("cargo");
+                }
+
+                if (value === "caps") {
+                    return category.includes("cap");
+                }
+
+                if (value === "accessories") {
+                    return category.includes("tote") || category.includes("accessor");
+                }
+
+                return false;
+            });
+        }
+
+        const priceMatch = price >= minPrice && price <= maxPrice;
+
+        product.style.display =
+            categoryMatch && priceMatch ? "" : "none";
+    });
+});
+
+
 document.getElementById("clear-filters").addEventListener("click", function () {
 
     document.querySelectorAll('input[name="category"]').forEach(checkbox => {
