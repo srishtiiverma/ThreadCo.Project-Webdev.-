@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThreadCo - Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>ThreadCo</h1>
+    <nav>
+        <ul class="random">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="product.html">Products</a></li>
+            <li><a href="prod-detail.html">Product Detail</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Checkout</h2>
+
+        <div id="order-summary">
+            <h3>Order Summary</h3>
+            <div id="product-info"></div>
+            <h3 id="total"></h3>
+        </div>
+
+        <hr>
+
+        <h3>Delivery Details</h3>
+
+        <form id="checkout-form">
+
+            <label for="name">Full Name</label><br>
+            <input type="text" id="name" required><br><br>
+
+            <label for="phone">Phone Number</label><br>
+            <input type="tel" id="phone" pattern="[0-9]{10}" maxlength="10" required><br><br>
+
+            <label for="address">Address</label><br>
+            <textarea id="address" rows="4" required></textarea><br><br>
+
+            <label for="city">City</label><br>
+            <input type="text" id="city" required><br><br>
+
+            <label for="pincode">Pincode</label><br>
+            <input type="text" id="pincode" pattern="[0-9]{6}" maxlength="6" required><br><br>
+
+            <h3>Payment Method</h3>
+
+            <label>
+                <input type="radio" name="payment" value="cod" required>
+                Cash on Delivery
+            </label>
+            <br>
+
+            <label>
+                <input type="radio" name="payment" value="online">
+                Online Payment
+            </label>
+
+            <br><br>
+
+            <button type="submit">Place Order</button>
+
+        </form>
+
+        <div id="confirmation" style="display:none;">
+            <h2>🎉 Order Placed Successfully!</h2>
+            <p>Thank you for shopping with ThreadCo.</p>
+            <p id="order-message"></p>
+            <a href="project.html">Continue Shopping</a>
+        </div>
+
+    </section>
+</main>
+
+<script>
+
+const product = JSON.parse(localStorage.getItem("buyNowProduct"));
+
+const productInfo = document.getElementById("product-info");
+const total = document.getElementById("total");
+
+if (product) {
+
+    productInfo.innerHTML = `
+        <p><strong>Product:</strong> ${product.name}</p>
+        <p><strong>Price:</strong> ₹${product.price}</p>
+    `;
+
+    total.textContent = "Total: ₹" + product.price;
+
+} else {
+
+    productInfo.innerHTML = "<p>No product selected.</p>";
+    total.textContent = "Total: ₹0";
+
+}
+
+document.getElementById("checkout-form").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+
+    document.getElementById("checkout-form").style.display = "none";
+    document.getElementById("order-summary").style.display = "none";
+
+    document.getElementById("confirmation").style.display = "block";
+
+    document.getElementById("order-message").textContent =
+        "Thank you, " + name + "! Your order has been received.";
+
+    localStorage.removeItem("buyNowProduct");
+
+});
+
+</script>
+
+</body>
+</html>
