@@ -23,134 +23,106 @@ function buyNow(name, price) {
 }
 
 function updateCartCount() {
-    const cartLink = document.getElementById("hey");
+    const cartLinks = document.querySelectorAll(
+        'a[href="cart.html"], #hey'
+    );
 
-    if (cartLink) {
+    cartLinks.forEach(function(cartLink) {
         cartLink.textContent = "Cart(" + cart.length + ")";
-    }
-}
-
-document.addEventListener("DOMContentLoaded", updateCartCount);
-document.getElementById("apply-filters").addEventListener("click", function () {
-    const selectedCategories = Array.from(
-        document.querySelectorAll('input[name="category"]:checked')
-    ).map(checkbox => checkbox.value.toLowerCase());
-
-    const minPrice = Number(document.getElementById("price-min").value) || 0;
-    const maxPrice = Number(document.getElementById("price-max").value) || Infinity;
-
-    const sortValue = document.getElementById("sort").value;
-
-    const products = Array.from(document.querySelectorAll("#products .grid article"));
-
-    products.forEach(product => {
-        const categoryText = product.querySelector("p span")?.textContent.toLowerCase() || "";
-
-        const priceText = product.querySelector("p:nth-of-type(2) strong")?.textContent || "";
-        const price = Number(priceText.replace(/[^\d]/g, ""));
-
-        const categoryMatch =
-            selectedCategories.length === 0 ||
-            selectedCategories.some(category => categoryText.includes(category));
-
-        const priceMatch = price >= minPrice && price <= maxPrice;
-
-        product.style.display = categoryMatch && priceMatch ? "" : "none";
     });
-
-    const grid = document.querySelector("#products .grid");
-
-    const visibleProducts = products.filter(
-        product => product.style.display !== "none"
-    );
-
-    if (sortValue === "price-low") {
-        visibleProducts.sort((a, b) => getPrice(a) - getPrice(b));
-    } 
-    else if (sortValue === "price-high") {
-        visibleProducts.sort((a, b) => getPrice(b) - getPrice(a));
-    }
-
-    visibleProducts.forEach(product => grid.appendChild(product));
-});
-
-
-function getPrice(product) {
-    const priceText = product.querySelector("p:nth-of-type(2) strong")?.textContent || "";
-    return Number(priceText.replace(/[^\d]/g, ""));
 }
 
 
-document.getElementById("apply-filters").addEventListener("click", function () {
+document.addEventListener("DOMContentLoaded", function() {
 
-    const selectedCategories = Array.from(
-        document.querySelectorAll('input[name="category"]:checked')
-    ).map(checkbox => checkbox.value);
+    updateCartCount();
 
-    const minPrice = Number(document.getElementById("price-min").value) || 0;
-    const maxPrice = Number(document.getElementById("price-max").value) || Infinity;
+    const applyButton = document.getElementById("apply-filters");
+    const clearButton = document.getElementById("clear-filters");
+    const sortSelect = document.getElementById("sort");
 
-    const products = Array.from(
-        document.querySelectorAll("#products .grid article")
-    );
+    const productGrid = document.querySelector("#products .grid");
 
-    products.forEach(product => {
+    if (!productGrid) {
+        return;
+    }
 
-        const category = product.querySelector("p span")?.textContent
-            .trim()
-            .toLowerCase();
+    function getProducts() {
+        return Array.from(
+            productGrid.querySelectorAll("article")
+        );
+    }
 
-        const priceText = product.querySelector("p strong")?.textContent || "";
-        const price = Number(priceText.replace(/[^\d]/g, ""));
+    function getPrice(product) {
+        const priceElement = product.querySelector("p strong");
 
-        let categoryMatch = true;
-
-        if (selectedCategories.length > 0) {
-            categoryMatch = selectedCategories.some(value => {
-
-                if (value === "tshirts") {
-                    return category.includes("tshirt") || category.includes("t-shirt");
-                }
-
-                if (value === "hoodies") {
-                    return category.includes("hoodie");
-                }
-
-                if (value === "cargo") {
-                    return category.includes("cargo");
-                }
-
-                if (value === "caps") {
-                    return category.includes("cap");
-                }
-
-                if (value === "accessories") {
-                    return category.includes("tote") || category.includes("accessor");
-                }
-
-                return false;
-            });
+        if (!priceElement) {
+            return 0;
         }
 
-        const priceMatch = price >= minPrice && price <= maxPrice;
+        return Number(
+            priceElement.textContent.replace(/[^\d]/g, "")
+        );
+    }
 
-        product.style.display =
-            categoryMatch && priceMatch ? "" : "none";
-    });
-});
+    function getCategory(product) {
+        const span = product.querySelector("p span");
 
+        if (!span) {
+            return "";
+        }
 
-document.getElementById("clear-filters").addEventListener("click", function () {
+        return span.textContent.trim().toLowerCase();
+    }
 
-    document.querySelectorAll('input[name="category"]').forEach(checkbox => {
-        checkbox.checked = false;
-    });
+    function categoryMatches(product, selectedCategories) {
 
-    document.getElementById("price-min").value = "";
-    document.getElementById("price-max").value = "";
-    document.getElementById("sort").value = "popular";
+        if (selectedCategories.length === 0) {
+            return true;
+        }
 
-    document.querySelectorAll("#products .grid article").forEach(product => {
-        product.style.display = "";
-    });
-});
+        const category = getCategory(product);
+
+        return selectedCategories.some(function(value) {
+
+            if (value === "tshirts") {
+                return category.includes("tshirt") ||
+                       category.includes("t-shirt");
+            }
+
+            if (value === "hoodies") {
+                return category.includes("hoodie");
+            }
+
+            if (value === "cargo") {
+                return category.includes("cargo");
+            }
+
+            if (value === "caps") {
+                return category.includes("cap");
+            }
+
+            if (value === "accessories") {
+                return category.includes("accessor") ||
+                       category.includes("tote");
+            }
+
+            return false;
+        });
+    }
+
+    function applyFilters() {
+
+        const selectedCategories = Array.from(
+            document.querySelectorAll(
+                'input[name="category"]:checked'
+            )
+        ).map(function(checkbox) {
+            return checkbox.value;
+        });
+
+        const minInput = document.getElementById("price-min");
+        const maxInput = document.getElementById("price-max");
+
+        const minPrice = Number(minInput.value) || 0;
+        const maxPrice = Number(maxInput.value) || Infinity;
